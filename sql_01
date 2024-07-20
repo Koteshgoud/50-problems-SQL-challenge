@@ -1,0 +1,70 @@
+# 01/50 Problems SQL challenge
+
+-- Create the employees table
+CREATE TABLE employees (
+    employee_id SERIAL PRIMARY KEY,
+    emp_name VARCHAR(100),
+    emp_department VARCHAR(50),
+    emp_salary DECIMAL(10, 2)
+);
+
+-- Insert records for three departments
+INSERT INTO employees (emp_name, emp_department, emp_salary) VALUES 
+('John Doe', 'Engineering', 63000),
+('Jane Smith', 'Engineering', 55000),
+('Michael Johnson', 'Engineering', 64000),
+('Emily Davis', 'Marketing', 58000),
+('Chris Brown', 'Marketing', 56000),
+('Emma Wilson', 'Marketing', 59000),
+('Alex Lee', 'Sales', 58000),
+('Sarah Adams', 'Sales', 58000),
+('Ryan Clark', 'Sales', 61000),
+(11, 'zara', 'it', 63000);
+
+
+/*
+Task
+
+1.Write the SQL query to find the second highest salary
+2.Get the details of the employee with the second-highest salary from each department
+
+*/
+
+-- My Solution for 1
+
+-- Approach 1
+
+SELECT * FROM employees
+ORDER BY emp_salary DESC
+LIMIT 1 OFFSET 1;
+
+
+-- ADDED new records
+
+
+
+-- Approach 2
+-- Window function dense_rank
+
+SELECT *
+FROM
+(	SELECT *,
+	DENSE_RANK() OVER( ORDER BY emp_salary DESC) drn	
+	FROM employees
+) x
+WHERE drn = 2
+
+
+-- My Solution for 2
+
+SELECT *
+FROM
+(SELECT *,
+	DENSE_RANK() OVER( partition by emp_department, ORDER BY emp_salary DESC) drn	
+	FROM employees
+)x
+WHERE drn = 2
+
+
+
+

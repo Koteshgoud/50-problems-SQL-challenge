@@ -1,6 +1,7 @@
 # 04 SQL problem challenge
 # 04/50
 
+drop table if exist orders;
 
 create table orders(
   	category varchar(20),
@@ -28,3 +29,8 @@ Insert into orders values
 ('toys','yoyo',141,129.00,'2022/07/15'),
 ('toys','yoyo',145,189.00,'2022/07/15'),
 ('electronics','vacuum',145,189.00,'2022/07/15');
+
+
+select * from orders
+
+

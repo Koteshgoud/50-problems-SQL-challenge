@@ -1,0 +1,45 @@
+# 03 SQL 50 ploblem challenge
+# 03/50
+
+DROP TABLE IF EXISTS products;
+	
+CREATE TABLE products (
+  product_id  INT PRIMARY KEY,
+  product_name nvarchar(225),
+  category nvarchar(225),
+  quantity INT 
+);
+
+-- Insert records 
+insert into products(product_id, product_name, category, quantity) values
+(1, 'vivo phone v12', 'electronics', 10),
+(2, 'Apple iPhone 12 Pro', 'Electronics', 150),
+(3, 'Sony PlayStation 5', 'Electronics', 80),
+(4, 'Nike Air Max 270', 'Clothing', 200),
+(5, 'Adidas Ultraboost 20', ' Clothing', 200),
+(6, 'Levis Mens 501 Jeans', 'Clothing', 90),
+(7, 'Instant Pot Duo 7-in-1', 'Home & Kitchen', 180),
+(8, 'Keurig K-Classic Coffee Maker', 'Home & Kitchen', 130),
+(9, 'iRobot Roomba 675 Robot Vacuum', 'Home & Kitchen', 130), 
+(10, 'Breville Compact Smart Oven', 'Home & Kitchen', 90),
+(11, 'Dyson V11 Animal Cordless Vacuum', 'Home & Kitchen', 90);
+
+
+-- Q.03
+-- write a query to find top selling product in each category
+
+-- query
+
+select * from products
+
+
+select * from (select *, DENSER_RANK() over(partition by category, order by quantity desc) as DRK from products
+order by category, quantity desc) x
+where drk =1;
+
+
+-- thank you 
+-- happy coding
+
+
+

@@ -1,8 +1,8 @@
-# 04 SQL problem challenge
-# 04/50
+# SQL 50 problem challenge
+## 04/50 problem
 
-drop table if exist orders;
 
+drop table if exists orders;
 create table orders(
   	category varchar(20),
 	product varchar(20),
@@ -30,7 +30,52 @@ Insert into orders values
 ('toys','yoyo',145,189.00,'2022/07/15'),
 ('electronics','vacuum',145,189.00,'2022/07/15');
 
+--------------------------------------------------------------------------------------------
 
-select * from orders
+select * from orders;
+--- find the top 2 selling products based on top 2 category based on total spend
 
+-- top 2 category on spend
+-- top 2 products on category
 
+with cte as 
+(select category, spend_c from 
+                             (select category, sum(spend) as spend_c, 
+                              dense_rank() over(order by sum(spend) desc) as DRK_C
+                              from orders
+			       group by category
+                              order by spend_c desc) x
+where DRK_C <=2)                    
+
+select category, product,spend_p  from (select  category, product, sum(spend) as spend_p,
+dense_rank() over(partition by category order by sum(spend) desc) as DRK_P
+from orders 
+group by product, category
+order by category, spend_p desc) y
+where DRK_P <=2 and category in (select category from cte)
+order by spend_p desc, category;
+
+----------------------------------------------------------------------------------------------------------
+---  method - 2 
+---  or  (By join with clause)
+
+with cte as 
+(select category, spend_c from 
+                             (select category, sum(spend) as spend_c, 
+                              dense_rank() over(order by sum(spend) desc) as DRK_C
+                              from orders
+                              group by category
+                              order by spend_c desc) x
+where DRK_C <=2)                    
+
+select category, product,spend_p  from (select  o.category, o.product, sum(spend) as spend_p,
+dense_rank() over(partition by o.category order by sum(o.spend) desc) as DRK_P
+from orders o join cte as c
+on c.category=o.category
+group by o.product, o.category
+order by o.category, spend_p desc) y
+where DRK_P <=2
+----------------------------------------------------------------------------------------------------------------
+
+-- thank you 
+-- happy coding

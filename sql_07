@@ -1,0 +1,47 @@
+-- 07 SQL-50-problems-challenge
+-- 07/50
+
+DROP TABLE IF EXISTS emp_duplicates;
+
+-- Create the employee_salary table
+CREATE TABLE emp_duplicates (
+    emp_id INT,
+    name VARCHAR(100),
+    department VARCHAR(50),
+    salary DECIMAL(10, 2)
+);
+
+
+-- Insert all records again to simulate duplicates
+INSERT INTO emp_duplicates(emp_id, name, department, salary) VALUES
+(1, 'John Doe', 'Finance', 60000.00),
+(2, 'Jane Smith', 'Finance', 65000.00), 
+(2, 'Jane Smith', 'Finance', 65000.00),   -- Duplicate
+(9, 'Lisa Anderson', 'Sales', 63000.00),
+(9, 'Lisa Anderson', 'Sales', 63000.00),  -- Duplicate
+(9, 'Lisa Anderson', 'Sales', 63000.00),  -- Duplicate
+(10, 'Kevin Martinez', 'Sales', 61000.00);
+
+
+select * from emp_duplicates;
+
+-- find the duplicates values from the emp_duplicates table
+
+
+-- method - 01   ( Highly recomended method )
+
+select * from (select *, row_number() over(partition by name) as Row_no from emp_duplicates) x
+where Row_no > 1;
+
+
+
+-- method - 02
+
+select emp_id, name, count(1) as repeated from emp_duplicates
+group by emp_id, name
+having repeated > 1;
+
+
+-- thank you 
+-- happy coding
+

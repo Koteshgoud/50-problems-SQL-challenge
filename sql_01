@@ -1,6 +1,7 @@
-# 01/50 Problems SQL challenge
+--- 01/50 Problems SQL challenge
 
--- Create the employees table
+--- Create the employees table
+
 CREATE TABLE employees (
     employee_id SERIAL PRIMARY KEY,
     emp_name VARCHAR(100),
@@ -8,7 +9,7 @@ CREATE TABLE employees (
     emp_salary DECIMAL(10, 2)
 );
 
--- Insert records for three departments
+--- Insert records for three departments
 INSERT INTO employees (emp_name, emp_department, emp_salary) VALUES 
 ('John Doe', 'Engineering', 63000),
 ('Jane Smith', 'Engineering', 55000),
@@ -30,21 +31,17 @@ Task
 
 */
 
--- My Solution for 1
+--- My Solution for 1
 
--- Approach 1
+--- Method 1
 
 SELECT * FROM employees
 ORDER BY emp_salary DESC
 LIMIT 1 OFFSET 1;
 
 
--- ADDED new records
-
-
-
--- Approach 2
--- Window function dense_rank
+--- Method 2
+--- Window function dense_rank
 
 SELECT *
 FROM
@@ -55,7 +52,7 @@ FROM
 WHERE drn = 2
 
 
--- My Solution for 2
+--- My Solution for 2
 
 SELECT *
 FROM

@@ -9,6 +9,7 @@ CREATE TABLE Orders (
     TotalAmount DECIMAL(10, 2)
 );
 
+
 DROP TABLE IF EXISTS Returns;
 CREATE TABLE Returns (
     ReturnID INT PRIMARY KEY,

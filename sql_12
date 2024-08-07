@@ -1,0 +1,63 @@
+# 12 SQL 50 Problems Challenge
+# 12/50
+
+DROP TABLE IF EXISTS Employees_1;
+
+
+-- Create Employees table
+
+CREATE TABLE Employees_1 (
+    id INT PRIMARY KEY,
+    name VARCHAR(255)
+);
+
+
+-- Insert sample data into Employees table
+
+INSERT INTO Employees_1 (id, name) VALUES
+    (1, 'Alice'),
+    (7, 'Bob'),
+    (11, 'Meir'),
+    (90, 'Winston'),
+    (3, 'Jonathan');
+
+
+DROP TABLE IF EXISTS EmployeeUNI;
+
+
+-- Create EmployeeUNI table
+
+CREATE TABLE EmployeeUNI (
+    id INT PRIMARY KEY,
+    unique_id INT
+);
+
+
+-- Insert sample data into EmployeeUNI table
+
+INSERT INTO EmployeeUNI (id, unique_id) VALUES
+    (3, 1),
+    (11, 2),
+    (90, 3);         
+
+
+select * from employees_1;
+select * from employeeuni;
+
+
+/*
+
+Q.12:-  Write a solution to show the unique ID of each user, 
+        If a user does not have a unique ID replace just show null.
+
+        Return employee name and their unique_id
+*/
+
+
+select e.name, ee.unique_id from employees_1 as e
+left join employeeuni as ee on e.id = ee.id
+order by ee.unique_id;
+
+
+-- Happy coding
+-- Thank you

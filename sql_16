@@ -1,7 +1,6 @@
 -- SQL Problem 16/50 Challenge 
 -- 16/50
 
-
 -- Creating the orders table
 DROP TABLE IF EXISTS orders;
 CREATE TABLE orders (

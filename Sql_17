@@ -77,5 +77,6 @@ HAVING COUNT(DISTINCT p.product_category) = (
 );
 
 
+
 -- Happy coding
 -- thank you

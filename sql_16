@@ -107,5 +107,27 @@ prev_month_revenue as pr
 ON cr.product_id = pr.product_id
 WHERE cr.current_month_rev < pr.prev_month_rev
 
+
+-- present 
+
+
+with cur_month 
+as 
+(
+select product_id, sum(quantity) as cur_quantity, sum(quantity * price) as cur_rev from orders_3
+where extract(month from order_date) = 4 -- month number
+group by product_id
+),
+pev_month as
+(
+select product_id, sum(quantity) as pev_quantity, sum(quantity * price) as pev_rev from orders_3
+where extract(month from order_date) = 3 -- month number
+group by product_id
+)
+select cr.product_id, cr.cur_quantity, pev.pev_quantity, cr.cur_rev, pev.pev_rev from cur_month as cr
+join pev_month as pev on cr.product_id = pev.product_id
+where cur_rev < pev_rev 
+
+
 -- Happy coding
 -- Thank you

@@ -1,4 +1,4 @@
--- Sql_problem 17/50
+-- sql_problem 17/50
 
 DROP TABLE IF EXISTS customers;
 -- Creating the Customers table

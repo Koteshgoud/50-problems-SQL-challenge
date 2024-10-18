@@ -1,5 +1,5 @@
 # 50 SQL Problems Challenge
-![SQL]()
+![SQL](https://github.com/Koteshgoud/50-problems-SQL-challenge/blob/main/th.jpeg)
 Welcome to my 50 SQL Problems Challenge repository!
 
 I have embarked on a journey to solve 50 SQL problems, and I will be posting each solution here. This challenge is aimed at sharpening my SQL skills and sharing my progress with the community.
